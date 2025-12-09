@@ -5,8 +5,8 @@ export default class WeatherData {
     }
 
     async getForecast(city) {
-        const lat = city.lat;
-        const lon = city.lon;
+        const lat = city.coord.lat;
+        const lon = city.coord.lon;
         const units = "metric";
         const lang = "cs";
 
