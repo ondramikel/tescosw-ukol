@@ -12,7 +12,7 @@ export default class CitySearch {
     find(prefix) {
         if (!prefix || prefix.length <= 1) return [];
         const lowerPrefix = prefix.toLowerCase();
-        return this.cities.filter(city => city.name.toLowerCase().startsWith(lowerPrefix));
+        return this.cities.filter(city => city.name.toLowerCase().includes(lowerPrefix));
     }
 
     cityExists(name) {
