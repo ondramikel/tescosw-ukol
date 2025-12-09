@@ -10,8 +10,15 @@ export default class CitySearch {
     }
 
     find(prefix) {
-        if (!prefix) return [];
+        if (!prefix || prefix.length <= 1) return [];
         const lowerPrefix = prefix.toLowerCase();
         return this.cities.filter(city => city.name.toLowerCase().startsWith(lowerPrefix));
+    }
+
+    cityExists(name) {
+        if (!name) return false;
+        const lowerName = name.toLowerCase();
+        return this.cities.find(city => city.name.toLowerCase() === lowerName);
+
     }
 }
