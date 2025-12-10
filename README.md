@@ -6,7 +6,8 @@ Jedná se o jednoduchou webovou aplikaci pro předpověď počasí. Uživatel za
 ---
 
 ## Spuštění aplikace
-Pro spuštění aplikace stačí otevřít `index.html` ve vašem oblíbeném moderním prohlížeči.
+Projekt se spouští přes lokální server (např. VSCode Live Preview, nebo VSCode Live Server), aby fungovaly všechny moduly, načítání JSON, obrázky a další zdroje. Otevření `index.html` přímo z disku (file://) nemusí fungovat kvůli bezpečnostním omezením prohlížeče.
+
 
 
 ---
