@@ -1,0 +1,373 @@
+// Variables
+
+$web_max_w: 2000px;
+$border-radius: 8px;
+$padding: min(8vw, 140px);
+
+$bg_color: linear-gradient(to right, #005295, #065ba0, #0d65ab, #136fb6, #1979c1, #197bc3, #1a7ec6, #1a80c8, #157bc2, #0f76bd, #0771b7, #006cb2);
+
+$primarni_barva: #3d4856;
+$sekundarni_barva: #a1acbd;
+$font-size: 1rem;
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: $font-size;
+
+}
+
+
+
+body {
+    max-width: $web_max_w;
+    overflow-x: hidden;
+    margin: 0 auto;
+}
+
+input {
+    padding: 1em 2.2em;
+    font-size: $font-size;
+    width: 100%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 0.5px solid #777777;
+    border-radius: $border-radius;
+}
+
+button {
+    background: unset;
+    border: unset;
+    border-radius: unset;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+
+    &.title_heading {
+        text-align: center;
+        color: #f0f0f0;
+        margin-bottom: 2.8rem;
+    }
+}
+h2 {
+    font-size: clamp(1.3rem, 2.3vw, 2.2rem);
+}
+h3 {
+    font-size: clamp(1.1rem, 1.8vw, 1.8rem);
+}
+
+main {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 100px $padding;
+    min-height: 100vh;
+    background: $bg_color;
+}
+
+.search_wrap {
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: min(80%, 1000px);
+    margin-inline: auto;
+
+
+
+    .suggestion_wrap {
+        width: 100%;
+        position: relative;
+
+        .geo {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .suggestions_box {
+            position: absolute;
+            left: 0;
+            top: calc(100% + 10px);
+
+            display: flex;
+            flex-direction: column;
+            gap:8px;
+
+            height: fit-content;
+            width: 100%;
+
+            &:not(:empty) {
+                padding: 1em 2.2em;
+                width: 100%;
+                background: #FFFFFF 0% 0% no-repeat padding-box;
+                border: 0.5px solid #777777;
+                border-radius: $border-radius;
+
+                overflow-y: auto;
+                max-height: 30vh;
+                @media screen and (max-width: 420px) {
+                    padding: 1em;
+
+                }
+            }
+
+
+            p {
+                cursor: pointer;
+                padding: .5em 1em;
+                transition: all .3s ease-in-out;
+                border-radius: $border-radius;
+
+                &:hover {
+                    background: #e7e7e7;
+                }
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 870px) {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 420px) {
+        .btn {
+            padding: 1em 1.2em;
+        }
+        input {
+            padding-left: 1.2em;
+        }
+    }
+}
+
+
+.forecast_wrap {
+    display: grid;
+    gap: 25px 20px;
+    width: 100%;
+    margin-inline: auto;
+    margin-top: 70px;
+    grid-template-columns: repeat(5, 1fr);
+
+    
+
+
+    h1 {
+        grid-column: 1/-1;
+        color: #f0f0f0;
+        margin-bottom: .3rem;
+        text-align: center;
+    }
+
+    .blok {
+        
+
+        background: #e6ebf19a;
+        border-radius: $border-radius;
+        padding: 2rem 1.5rem;
+
+
+        display: flex;
+        flex-direction: column;
+        gap: 17px 20px;
+
+
+        .temperature_block {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+
+            align-items: center;
+            justify-content: space-between;
+
+            background-color: rgba(242, 242, 242, 0.822);
+            border-radius: $border-radius;
+            padding: .3em .8em;
+
+            span {
+                color: $primarni_barva;
+                white-space: nowrap;
+                text-align: center;
+
+                &.for_time {
+                    font-size: 1.25rem;
+                    font-weight: 300;
+                }
+
+                &.for_temp {
+                    font-size: 1.4rem;
+                    font-weight: 500;
+                }
+            }
+        }
+
+
+
+        &:first-of-type {
+            grid-column: 1/-1;
+
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+
+            h2 {
+                flex-basis: 100%;
+            }
+
+            .temperature_block {
+                flex-direction: column;
+                flex-basis: calc((100% / 8) - 20px);
+                gap: 10px;
+
+                span {
+                    &.for_time {
+                        font-size: 1.4rem;
+                        font-weight: 400;
+                    }
+
+                    &.for_temp {
+                        font-size: 1.8rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+
+        h2 {
+            
+            text-align: center;
+            margin-bottom: .6rem;
+            color: $primarni_barva;
+
+        }
+
+    }
+
+    @media screen and (max-width: 1600px) {
+        grid-template-columns: repeat(6, 1fr);
+
+        .blok {
+            grid-column: span 3;
+
+            &:first-of-type .temperature_block {
+                flex-basis: calc((100% / 4) - 20px);
+            }
+        }
+
+        &:has(.blok:nth-of-type(6)) {
+            .blok:nth-last-of-type(1),
+            .blok:nth-last-of-type(2),
+            .blok:nth-last-of-type(3) {
+                grid-column: span 2;
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 870px) {
+        grid-template-columns: repeat(1, 1fr);
+
+        .blok {
+            grid-column: unset;
+
+            &:first-of-type {
+                margin-bottom: 4rem;
+            } 
+
+            &:not(:first-of-type) {
+                width: min(500px, 100%);
+                margin-inline: auto;
+            }
+        }
+
+        &:has(.blok:nth-of-type(6)) {
+            .blok:nth-last-of-type(1),
+            .blok:nth-last-of-type(2),
+            .blok:nth-last-of-type(3) {
+                grid-column: unset;
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .blok {
+
+            &:first-of-type .temperature_block {
+                flex-basis: calc((100% / 2) - 20px);
+
+                span {
+                    &.for_time {
+                        font-size: 1.1rem;
+                    }
+
+                    &.for_temp {
+                        font-size: 1.35rem;
+                    }
+                }
+            }
+        }
+    }
+
+    
+}
+
+
+.btn {
+    width: fit-content;
+    background: $sekundarni_barva;
+    height: fit-content;
+    display: flex;
+    text-align: center;
+    color: white;
+    padding: 1em 2.2em;
+    font-size: $font-size;
+    transition: all .3s ease-in-out;
+    box-sizing: border-box;
+    align-items: center;
+    border-radius: $border-radius;
+    justify-content: space-between;
+    gap:15px;
+    border: 1px solid $sekundarni_barva;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: white;
+    color: $sekundarni_barva;
+}
+
+
+.ico {
+    position: relative;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        
+    }
+
+    &.geo::after {
+        mask: url('../img/location-target-svgrepo-com.svg') center/contain no-repeat;
+        -webkit-mask: url('../img/location-target-svgrepo-com.svg') center/contain no-repeat;
+        background: $sekundarni_barva;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+
+        
+    }
+
+    &.geo:hover::after {
+        background: $primarni_barva;
+    }
+}

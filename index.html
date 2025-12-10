@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/scss/styles.css">
+    <title>Aplikace pro předpověď počasí</title>
+</head>
+<body>
+
+    <main>
+        <h1 class="title_heading">Aplikace pro předpověď počasí</h1>
+        <section class="search_wrap">
+                <div class="suggestion_wrap">
+                    <input type="text" id="input_field" placeholder="Zadejte město, nebo použijte geolokaci">
+                    <div id="suggestions" class="suggestions_box"></div>
+                    <button id="geolocate" class="ico geo"></button>
+
+                </div>
+            <button id="chose" class="btn">Vybrat</button>
+        </section>
+
+        
+        <div id="forecast" class="forecast_wrap">
+        </div>
+    </main>
+    <script type="module" src="src/js/main.js"></script>
+    
+</body>
+</html>
