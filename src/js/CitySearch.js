@@ -1,3 +1,18 @@
+/**
+ * CitySearch.js
+ * --------------------
+ * Modul načítá seznam měst z JSON souboru a zajišťuje vyhledávání, našeptávání a kontroluje existenci zadaného názvu města.
+ * Třída: CitySearch
+ * @param json - cesta k json souboru
+ * 
+ * Metody:
+ *  - loadJson()        // načte json soubor
+ *  - find(prefix)      // najde všechny města odpovídající zadané časti a seřadí je podle podobnosti s prefixem
+ *  - cityExists(name)  // zjistí jestli zadané město existuje v jsonu
+ * 
+ */
+
+
 export default class CitySearch {
     constructor(json) {
         this.json = json;
@@ -9,6 +24,12 @@ export default class CitySearch {
         const response = await fetch(this.json);
         this.cities = await response.json();
     }
+
+    /**
+     * Najde všechny města odpovídající zadané časti a seřadí je podle podobnosti s prefixem
+     * @param prefix - String který má obsahovat hledané město
+     * @returns vrací seřazený seznam měst zkrácený na délku z proměné this.maxSuggestions
+     */
 
     find(prefix) {
         if (!prefix || prefix.length <= 1) return [];
@@ -38,6 +59,12 @@ export default class CitySearch {
 
         return sorted.slice(0, this.maxSuggestions);
     }
+
+    /**
+     * Zjistí jestli zadané město existuje v jsonu
+     * @param name - String který má obsahovat hledané město
+     * @returns v případě že najde, vrací objekt městaz JSONu
+     */
 
     cityExists(name) {
         if (!name) return false;

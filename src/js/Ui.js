@@ -1,3 +1,23 @@
+/**
+ * Ui.js
+ * --------------------
+ * Modul se stará se o vykreslování HTML prvků a pracuje s DOM. Vykresluje položky našeptávače a výslednou předpověď.
+ * Třída: Ui
+ * @param input - input element, ze kterého čteme hodnotu
+ * @param suggestions - element, do kterého vypisuji návrhy (našeptácač)
+ * @param forecast - element pro výpis předpovědi
+ * 
+ * Metody:
+ *  - renderSuggestions(cities)             // dostane seznam měst a každý vloží do bloku našeptávače
+ *  - createOrganizedWeatherData(weather)   // vytvoří dictionary kde klíč je datum předpovědi s hodnotami čas a teplota
+ *  - renderWeather(weather)                // z dictionary vyrenderuje html prvky s daty o počasí
+ *  - getInput()                            // vrátí hodnotu inputu
+ *  - setInput(inputValue)                  // nastaví hodnotu inputu (spíše z kosmetických důvodů, aby po geolokaci nebyl input prázdný)
+ *  - setCityName(cityName)                 // nastaví název města jako nadpis pro počasí
+ * 
+ */
+
+
 export default class Ui {
     constructor(input, suggestions, forecast) {
         this.input = input;
@@ -9,6 +29,10 @@ export default class Ui {
 
     }
 
+    /**
+     * Dostane seznam měst a každý vloží do bloku našeptávače
+     * @param cities - seznam měst pro výpis
+     */
 
     renderSuggestions(cities) {
         if (!this.suggestions) {
@@ -31,14 +55,20 @@ export default class Ui {
     }
 
 
+    /**
+     * Vytvoří dictionary kde klíč je datum předpovědi s hodnotami čas a teplota
+     * @param weather - z dat od OpenWeatherMap vytvoří strukturu pro příjemné generování předpovědi
+     * @returns - dictionary kde klíč je datum předpovědi s hodnotami čas a teplota 
+     */
+
     createOrganizedWeatherData(weather) {
         let organizedData = {};
 
         weather.forEach(data => {
             const raw_date = new Date(data.dt * 1000);
 
-            const date = raw_date.toLocaleDateString();
-            const time = raw_date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const date = raw_date.toLocaleDateString(navigator.language);
+            const time = raw_date.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
 
             const temperature = data.main.temp;
 
@@ -55,7 +85,12 @@ export default class Ui {
 
         return organizedData;
 
-    }    
+    }   
+    
+    /**
+     * Z dictionary vyrenderuje html prvky s daty o počasí 
+     * @param weather - z dat od OpenWeatherMap vytvoří strukturu pro příjemné generování předpovědi
+     */
 
     renderWeather(weather) {
         if (!this.forecast) {
@@ -118,6 +153,11 @@ export default class Ui {
 
         return this.input.value;
     }
+    
+    /**
+     * Nastaví hodnotu inputu (spíše z kosmetických důvodů, aby po geolokaci nebyl input prázdný)
+     * @param inputValue - požadovaná hodnota pro input
+     */
 
     setInput(inputValue) {
         if (!this.input) {
@@ -127,6 +167,11 @@ export default class Ui {
 
         this.input.value = inputValue;
     }
+
+    /**
+     * Nastaví název města jako nadpis pro počasí
+     * @param cityName - název města pro předpověď
+     */
 
     setCityName(cityName) {
         if (!cityName) {
