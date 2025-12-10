@@ -74,10 +74,12 @@ export default class WeatherApp {
                     console.log("Lon:", geoData.coord.lon);
 
 
+
                     this.weatherData.getForecast(geoData).then(data => {
                         console.log(data);
                         console.log(data.city.name);
                         this.ui.setCityName(data.city.name);
+                        this.ui.setInput(data.city.name);
 
                         this.ui.renderWeather(data.list);
                     });
