@@ -119,6 +119,15 @@ export default class Ui {
         return this.input.value;
     }
 
+    setInput(inputValue) {
+        if (!this.input) {
+            console.error("Input nenalezen");
+            return;
+        }
+
+        this.input.value = inputValue;
+    }
+
     setCityName(cityName) {
         if (!cityName) {
             console.error("Název nenalezen");
